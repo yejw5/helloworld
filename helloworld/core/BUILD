@@ -1,0 +1,44 @@
+# Description:
+#
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+licenses(["notice"])  # Apache 2.0
+
+load(
+    "//helloworld:helloworld.bzl",
+    "if_android",
+)
+
+cc_library(
+    name = "core",
+    srcs = glob(
+        [
+            "*.cc",
+        ]
+    ),
+    hdrs = glob([
+        "*.h",
+    ]),
+    copts = [
+        "-Werror",
+        "-Wextra",
+        "-Wno-missing-field-initializers",
+    ],
+    linkopts = ["-ldl"] + if_android([
+        "-pie",
+        "-lm",
+    ]),
+    deps = [
+        "//helloworld/public",
+        "//helloworld/proto:helloworld_cc",
+    ],
+)
+
+cc_binary(
+    name = "libhelloworld.so",
+    linkshared = 1,
+    linkstatic = 1,
+    deps = [":core"],
+)
