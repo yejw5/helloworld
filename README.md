@@ -1,9 +1,16 @@
-运行：
+Env:
+| deps  | version  | install ref  |
+|-------|----------|--------------|
+| bazel | 0.16.0   |[bazel install](https://docs.bazel.build/versions/master/install-ubuntu.html)|
+| adb   | \>= 1.0.32 | apt-get install android-tools-adb |
+| NDK   | r15c     | [NDK installation guide](https://developer.android.com/ndk/guides/setup#install) |
+
+Run:
 ```
 ./tools/build.sh
 ```
 
-代码依赖：
+Code Structure：
 ```
 ├── helloworld
 │   ├── BUILD
@@ -11,20 +18,20 @@
 │   │   └── BUILD
 │   ├── core
 │   │   ├── BUILD
-│   │   └── engine.cc  # 核心代码，其实就是拷贝NetDef对象的内容，还有一个print函数，会与pb一并编译成so
+│   │   └── engine.cc  # which will generate libhelloworld.so, protobuf-lite linked
 │   ├── example
 │   │   ├── BUILD
-│   │   └── example.cc  # 依赖于.a和.so
+│   │   └── example.cc  # depends on libnet.a and libhelloworld.so
 │   ├── helloworld.bzl
 │   ├── net
 │   │   ├── BUILD
-│   │   └── create_net.cc  # 类似于mace里面的codegen代码，创建一个NetDef对象
+│   │   └── create_net.cc  # libnet.a
 │   ├── proto
 │   │   ├── BUILD
 │   │   └── helloworld.proto
 │   └── public
 │       ├── BUILD
-│       └── helloworld.h  # engine的接口
+│       └── helloworld.h
 ├── tools
 │   ├── bazel.rc
 │   └── build.sh

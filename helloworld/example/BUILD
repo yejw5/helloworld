@@ -45,7 +45,6 @@ cc_binary(
     linkstatic = 1,
     deps = [
         "//helloworld/public",
-        "//helloworld/proto:helloworld_cc",
         "//helloworld/codegen:generated_libhello",
     ],
 )
