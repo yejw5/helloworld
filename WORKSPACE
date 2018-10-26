@@ -2,10 +2,10 @@ workspace(name = "helloworld")
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "542703acadc3f690d998f4641e1b988f15ba57ebca05fdfb1cd9095bec007948",
-    strip_prefix = "protobuf-3.4.0",
+    sha256 = "d7a221b3d4fb4f05b7473795ccea9e05dab3b8721f6286a95fffbffc2d926f8b",
+    strip_prefix = "protobuf-3.6.1",
     urls = [
-        "https://github.com/google/protobuf/archive/v3.4.0.zip",
+        "https://github.com/google/protobuf/archive/v3.6.1.zip",
     ],
 )
 
